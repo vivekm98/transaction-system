@@ -8,4 +8,9 @@ Its funcions:-
 also a admin :
 1) it will show all users
 2) transctions by date
-   
+
+you to to import modules:-
+1) import mysql.connector
+2) import getpass
+3) import calendar
+4) from datetime import date
