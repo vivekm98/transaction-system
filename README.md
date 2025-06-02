@@ -1,16 +1,29 @@
-# transaction-system
-Its a Terminal Based project 
-Its funcions:-
-1) widraw money
-2) deposite money
-3) money transfer
+# 🏦 VIP Banking System (CLI-Based)
 
-also a admin :
-1) it will show all users
-2) transctions by date
+This is a simple command-line based banking system built with Python and MySQL. It allows users to register, login, check balances, withdraw, deposit, and transfer money. An admin panel is also available to monitor user activity and transactions.
 
-you to to import modules:-
-1) import mysql.connector
-2) import getpass
-3) import calendar
-4) from datetime import date
+## 📌 Features
+
+- User registration with validation
+- Secure login using masked PIN entry (`getpass`)
+- Balance check, withdraw, deposit, and transfer functionalities
+- Admin access to view all users, transactions, and transfers
+- Data persistence using MySQL
+
+## 🛠️ Technologies Used
+
+- Python 3
+- MySQL
+- `mysql-connector-python` for database interaction
+- `getpass` for secure PIN input
+
+## 📋 Requirements
+
+- Python 3.x
+- MySQL server running locally
+- MySQL user with access to create databases and tables
+
+Install the required Python package:
+
+```bash
+pip install mysql-connector-python
