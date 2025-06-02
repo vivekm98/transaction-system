@@ -1,133 +1,96 @@
-Here's a complete `README.md` file for your terminal-based banking system project. You can copy this into your project repository on GitHub:
+# 💰 Banking Management System (Python + MySQL)
+
+A simple command-line banking system built in Python using MySQL. It supports user registration, login, balance inquiry, deposit, withdrawal, money transfers, and an admin panel for monitoring.
 
 ---
 
-# 💳 Terminal Banking System
+## 🚀 Features
 
-A simple terminal-based banking system built with Python and MySQL. This project allows users to register, log in, check balance, withdraw, deposit, and transfer money. It also includes an admin interface to view user data and transactions.
+### User Functions:
+- 🔐 Register with phone number and PIN
+- 🔓 Login with phone number and PIN
+- 💼 Check current account balance
+- 💸 Withdraw money
+- 💰 Deposit money
+- 🔄 Transfer money to another registered user
 
----
-
-## 📌 Features
-
-* User registration and login
-* Secure PIN authentication using `getpass`
-* Balance check
-* Withdraw with minimum balance check
-* Deposit functionality
-* Money transfer between users
-* Admin dashboard:
-
-  * View registered users
-  * View all transactions
-  * View all money transfers
+### Admin Panel:
+- 👥 View all registered users
+- 📄 View all transaction records
+- 🔁 View all money transfers
+- 🔎 View specific user transactions by phone number
+- 🔍 View specific user's transfer history
 
 ---
 
-## 🛠️ Tech Stack
+## 🧱 Tech Stack
 
-* **Python 3**
-* **MySQL**
-* `mysql-connector-python`
-* Standard library: `getpass`, `datetime`, `calendar`
+- **Python 3.x**
+- **MySQL** (with `mysql-connector-python`)
 
 ---
 
-## 🔧 Setup Instructions
+## 🛠️ Setup Instructions
 
-### 1. Clone the repository
-
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/terminal-banking-system.git
-cd terminal-banking-system
-```
+git clone https://github.com/your-username/banking-system.git
+cd banking-system
+````
 
-### 2. Install required packages
-
-Ensure you have MySQL running and install the required Python package:
+### 2. Install Required Python Package
 
 ```bash
 pip install mysql-connector-python
 ```
 
-### 3. Create MySQL Database
+### 3. Set Up MySQL Database
 
-Login to your MySQL server and create a database:
+* Log in to MySQL:
 
-```sql
-CREATE DATABASE vip;
-```
+  ```bash
+  mysql -u root -p
+  ```
 
-You do **not** need to create tables manually—the script will do that on first run.
+* Create the database:
 
-### 4. Update MySQL credentials
+  ```sql
+  CREATE DATABASE lol;
+  ```
 
-In the Python file (`bank.py` or main script), update the following credentials with your MySQL config:
+* Exit MySQL and run the script. Tables will be created automatically when the app starts.
 
-```python
-self.db = mysql.connector.connect(
-    host="localhost",
-    user="your_mysql_user",
-    password="your_mysql_password",
-    database="vip",
-    auth_plugin="mysql_native_password",
-)
-```
-
-### 5. Run the app
+### 4. Run the App
 
 ```bash
-python bank.py
+python your_script_name.py
 ```
+
+> Replace `your_script_name.py` with your Python file name (e.g., `banking.py`)
 
 ---
 
-## 🔐 Admin Login
-
-Use the following credentials for admin access:
+## 🔑 Default Admin Credentials
 
 * **Username:** `vicky`
 * **PIN:** `456`
 
 ---
 
-## 🧪 Sample CLI Options
+## 🧩 File Structure
 
-```text
-1: Register
-2: Login
-3: Admin Login
-4: Exit
 ```
-
-Inside user interface:
-
-```text
-1: Check Balance
-2: Withdraw
-3: Deposit
-4: Money Transfer
-5: Exit
+banking-system/
+├── your_script_name.py   # Replace with your Python file
+└── README.md             # This file
 ```
 
 ---
 
-## 📁 Folder Structure (Recommended)
+## 📌 Notes
 
-```
-.
-├── bank.py
-├── README.md
-└── requirements.txt  # optional
-```
+* Minimum balance of ₹100 must be maintained after withdrawal or transfer.
+* All users get ₹500 initial balance upon registration.
+* Phone number and username must be unique.
 
----
-
-## 📝 Future Improvements
-
-* Add password hashing for secure PIN storage
-* Add exception logging
-* Build a GUI or web interface
-* Implement OTP verification for transfers
-
----
+--
