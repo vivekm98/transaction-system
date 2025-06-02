@@ -10,7 +10,7 @@ class Vip:
             host="localhost",
             user="root",
             password="sayali0143",
-            database="vip",
+            database="lol",
             auth_plugin="mysql_native_password",
         )
         self.db1 = self.db.cursor()
@@ -23,7 +23,7 @@ class Vip:
         self.user2 = ""
         self.me = "me"
         self.pin = 0
-        self.w = "widraw--"
+        self.w = "withdraw"
         self.d = "deposite"
 
     def user_nam(self):
@@ -99,14 +99,14 @@ class Vip:
         user_name = "vicky"
         pin = "456"
         print("\n-------------WELCOME----------------\n")
-        name = input("--------- Enter User Name --------:")
-        pin2 = getpass.getpass("--------= Enter Pin----------:")
+        name = input("--------- Enter Admin User Name --------:")
+        pin2 = getpass.getpass("-------- Enter Pin----------:")
         if name == user_name:
             if pin2 == pin:
                 print("\n---------- SUCCESSFULLY LOGIN ------------\n")
                 while True:
                     choice = input(
-                        "\nEnter choice\n1:---1:Check Users \n---2:Check Transactions \n---3:Check MOney Transfer\n---4:Exite---\n-:"
+                        "\nEnter choice\n:---1:Check Users \n---2:Check Transactions \n---3:Check MOney Transfer\n---4:Perticular User Withdraw Deposite\n---5:Perticular User Money Transfer\n---6:Exite---\n-:"
                     )
                     c = int(choice)
                     if c == 1:
@@ -115,9 +115,12 @@ class Vip:
                         bk.check_record()
                     elif c == 3:
                         bk.check_transfer()
-
-                    elif c == 4:
+                    elif c == 6:
                         break
+                    elif c==5:
+                        bk.one_user_t()
+                    elif c==4:
+                        bk.one_u()
                     else:
                         print("invalid choice")
             else:
@@ -139,8 +142,41 @@ class Vip:
       print("-" * 40)
       for row in rows:
          print("{:<20} {:<15}".format(row[0], row[1]))
+         
+#--------single user money transfer---------------
 
+    def one_user_t(self):
+        phone_no=input("----Enter phone_no:")
+        self.db1.execute("select * from info2 where user_1='{}' ".format(phone_no))
+        rows = self.db1.fetchall()
+        if not rows:
+          print("No transfer records found.")
+          return
+
+        print("\n{:<10} {:<15} {:<15} {:<10} {:<15}".format("ID", "From", "To", "Amount", "Date"))
+        print("-" * 70)
+        for row in rows:
+          print("{:<10} {:<15} {:<15} {:<10} {:<15}".format(row[0], row[1], row[2], row[3], row[4]))
         
+        
+       
+
+    #--------------------single user money withdraw and deposite
+    def one_u(self):
+        phone_no=input("----Enter phone_no:")
+        self.db1.execute("select * from info where user_name='{}' ".format(phone_no))
+        rows = self.db1.fetchall()
+        if not rows:
+            print("No transactions found.")
+            return
+
+        print("\n{:<12} {:<15} {:<10} {:<10} {:<15}".format("ID", "User Name", "Action", "Amount", "Date"))
+          
+        print("-" * 65)
+        for row in rows:
+           print("{:<12} {:<15} {:<10} {:<10} {:<15}".format(row[0], row[1], row[2], row[3], row[4]))
+
+    
 
 #--------------------Transactions------------------------------
 
@@ -294,7 +330,7 @@ class Vip:
         while True:
             choice = int(
                 input(
-                    "\n 1:Check Balance \n 2:widraw \n 3:deposite \n 4:Money Transfer  \n 5:exit\nenter choice :"
+                    "\n 1:Check Balance \n 2:Withdraw \n 3:Deposite \n 4:Money Transfer  \n 5:Exit\nEnter choice :"
                 )
             )
             if choice == 1:
@@ -324,7 +360,7 @@ class Vip:
             print("xxx----------- Wrong Pin-------xxx")
             return
         v = date.today()
-        amount = int(input("------------Enter Amount To Widraw---:"))
+        amount = int(input("------------Enter Amount To Withdraw---:"))
         if self.balance > 500:
             self.balance -= amount
             if self.balance > 100:
