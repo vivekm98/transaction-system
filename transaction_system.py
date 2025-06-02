@@ -9,8 +9,8 @@ class Vip:
         self.db = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="root",
-            database="python",
+            password="sayali0143",
+            database="vip",
             auth_plugin="mysql_native_password",
         )
         self.db1 = self.db.cursor()
@@ -93,9 +93,86 @@ class Vip:
         )
         self.db.commit()
         
+   #----------------------Admin Login------------
+
+    def admin_login(self):
+        user_name = "vicky"
+        pin = "456"
+        print("\n-------------WELCOME----------------\n")
+        name = input("--------- Enter User Name --------:")
+        pin2 = getpass.getpass("--------= Enter Pin----------:")
+        if name == user_name:
+            if pin2 == pin:
+                print("\n---------- SUCCESSFULLY LOGIN ------------\n")
+                while True:
+                    choice = input(
+                        "\nEnter choice\n1:---1:Check Users \n---2:Check Transactions \n---3:Check MOney Transfer\n---4:Exite---\n-:"
+                    )
+                    c = int(choice)
+                    if c == 1:
+                        bk.user()
+                    elif c == 2:
+                        bk.check_record()
+                    elif c == 3:
+                        bk.check_transfer()
+
+                    elif c == 4:
+                        break
+                    else:
+                        print("invalid choice")
+            else:
+                print("XXX-------INCORRECT PIN -------XXX")
+        else:
+            print("xxx---------INVALID USER_NAME--------XXX")
+
+#--------------------- Check all Users-------------------
+
+    def user(self):
+      self.db1.execute("SELECT user_name, phone_no FROM user_info")
+      rows = self.db1.fetchall()
+
+      if not rows:
+         print("No users found.")
+         return
+
+      print("\n{:<20} {:<15}".format("User Name", "Phone Number"))
+      print("-" * 40)
+      for row in rows:
+         print("{:<20} {:<15}".format(row[0], row[1]))
+
+        
+
+#--------------------Transactions------------------------------
+
+    def check_record(self):
+        self.db1.execute("select * from info")
+        rows = self.db1.fetchall()
+        if not rows:
+            print("No transactions found.")
+            return
+
+        print("\n{:<12} {:<15} {:<10} {:<10} {:<15}".format("ID", "User Name", "Action", "Amount", "Date"))
+          
+        print("-" * 65)
+        for row in rows:
+           print("{:<12} {:<15} {:<10} {:<10} {:<15}".format(row[0], row[1], row[2], row[3], row[4]))
 
 
+#---------------Money Transfer------------------
 
+    def check_transfer(self):
+        self.db1.execute("select * from info2")
+        rows = self.db1.fetchall()
+        if not rows:
+          print("No transfer records found.")
+          return
+
+        print("\n{:<10} {:<15} {:<15} {:<10} {:<15}".format("ID", "From", "To", "Amount", "Date"))
+        print("-" * 70)
+        for row in rows:
+          print("{:<10} {:<15} {:<15} {:<10} {:<15}".format(row[0], row[1], row[2], row[3], row[4]))
+
+            
 #------------REgister---------------------------
 
     def register(self):
@@ -182,16 +259,6 @@ class Vip:
         )
         self.db.commit()
 
-        #   self.db1.execute(f"""
-        #   create table if not exists {name}(
-        #   widraw_amount int,
-        #   widraw_from varchar(30),
-        #   deposite_amount int,
-        #   deposite_to varchar(30)
-
-        #   )
-        #   # """)
-        #   self.db.commit()
         print("\n------Registration Succesfull------\n")
 
 #------------Login--------------------------
@@ -365,13 +432,15 @@ class Vip:
         while True:
             print("\n------------------ WELCOME ----------------\n")
             choice = int(
-                input("1:Register \n2:Login \n3:Exit \n Enter Choice:")
+                input("1:Register \n2:Login \n3:Admin_login \n4:Exit \n Enter Choice:")
             )
             if choice == 1:
                 bk.register()
             elif choice == 2:
                 bk.u_login()
             elif choice == 3:
+                bk.admin_login()
+            elif choice == 4:
                 break
             else:
                 print("xxx--------- Invalid Choice ----------xxx")
