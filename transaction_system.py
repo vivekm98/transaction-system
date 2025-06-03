@@ -9,7 +9,7 @@ class Vip:
         self.db = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="sayali0143",
+            password="root",
             database="lol",
             auth_plugin="mysql_native_password",
         )
