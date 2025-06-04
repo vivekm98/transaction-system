@@ -9,7 +9,7 @@ class Vip:
         self.db = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="root",
+            password="sayali0143",
             database="lol",
             auth_plugin="mysql_native_password",
         )
@@ -360,7 +360,14 @@ class Vip:
             print("xxx----------- Wrong Pin-------xxx")
             return
         v = date.today()
-        amount = int(input("------------Enter Amount To Withdraw---:"))
+        try:
+           amount = int(input("------------Enter Amount To Withdraw---:"))
+        except ValueError:
+            print("Enter valid Amount")
+        if amount<=0:
+            print("Enter Valid Amount")
+            return
+            
         if self.balance > 500:
             self.balance -= amount
             if self.balance > 100:
@@ -379,14 +386,20 @@ class Vip:
 
             else:
                 self.balance += amount
-                print("xxx----------Inceficient Money In Banck Account (you must have 100rs in bank account after widraw )-------------xxx")
+                print("xxx----------Inefficient Money In Banck Account (you must have 100rs in bank account after widraw )-------------xxx")
         else:
-            print("xxx----------Inceficient Balance ------------xxx")
+            print("xxx----------Inefficient Balance ------------xxx")
    
    #------------------Deposite-----------------------------
 
     def deposite(self):
-        amount = int(input("----------Enter Amount To Deposite---------:"))
+        try:
+           amount = int(input("------------Enter Amount To Deposite---:"))
+        except ValueError:
+            print("Enter valid Amount")
+        if amount<=0:
+            print("Enter Valid Amount")
+            return
         self.balance = amount + self.balance
         v = date.today()
         self.db1.execute(
@@ -421,7 +434,13 @@ class Vip:
             while True:
                 choice = int(input("\nEnter \n1:To Procced\n2:Exit\n:"))
                 if choice == 1:
-                    amount = int(input("----Enter Amount To Transfer---:"))
+                    try:
+                       amount = int(input("------------Enter Amount To Transfer---:"))
+                    except ValueError:
+                       print("Enter valid Amount")
+                    if amount<=0:
+                       print("Enter Valid Amount")
+                       return
                     if self.balance > amount + 500:
                         pin = getpass.getpass("-----------Enter Pin------------:")
                         if pin == self.pin:
@@ -466,7 +485,7 @@ class Vip:
 
     def home(self):
         while True:
-            print("\n------------------ WELCOME ----------------\n")
+            print("\n------------------ WELCOME To ATM ----------------\n")
             choice = int(
                 input("1:Register \n2:Login \n3:Admin_login \n4:Exit \n Enter Choice:")
             )
